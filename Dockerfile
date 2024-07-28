@@ -18,7 +18,7 @@ RUN apt-get update \
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.utf8
 
-RUN wget -O ngrok.zip https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip \
+RUN wget -O ngrok.zip https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3.5-stable-linux-amd64.zip \
     && unzip ngrok.zip \
     && rm /ngrok.zip \
     && mkdir /run/sshd \
@@ -41,8 +41,8 @@ ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLA
 RUN tar -C / -Jxpf /tmp/s6-overlay-symlinks-noarch.tar.xz
 
 # Copy S6 init scripts
-COPY s6/ /etc
 
+COPY s6/ /etc
 ENTRYPOINT ["/init"]
 EXPOSE 80 8888 8080 443 5130-5135 3306 7860
 CMD ["/bin/bash", "/docker.sh"]
